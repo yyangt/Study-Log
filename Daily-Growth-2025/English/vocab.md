@@ -8,3 +8,10 @@
 |scaffold|n.脚手架||
 |conceptualize|v.概念化，设想|| 
 |deviate|v.脱离，adj.异常的||
+|exponential|n.指数，adj.指数的||
+|decompose|v.衰变，分解|decomposition n.|
+|succinct|adj.简洁的||
+|clunky|adj.笨重的||
+|hallmark|n.特点||
+|excruciating|adj.极度痛苦的|v.折磨|
+|unhinge|v.失常，使混乱|hinge v.依赖|
