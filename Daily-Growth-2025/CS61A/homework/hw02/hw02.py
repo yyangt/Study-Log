@@ -61,7 +61,7 @@ def pingpong(n):
     True
     """
     "*** YOUR CODE HERE ***"
-    if n<=7:
+    if n<=8:
         return n
     else :
         '''
@@ -75,9 +75,13 @@ def pingpong(n):
             ans+=j
             i+=1
         return ans'''
-        if(num_eights(n)!=0 or n%8==0):
-            
-print(pingpong(30))
+        return pingpong(n-1)+direction(n-1)
+def direction (n):
+    if n==8:
+        return -1
+    return direction(n-1) * (-1 if num_eights(n) or n%8==0 else 1)
+    
+
 
 def missing_digits(n):
     """Given a number a that is in sorted, increasing order,
@@ -101,15 +105,16 @@ def missing_digits(n):
     7
     >>> missing_digits(4) # No missing numbers between 4 and 4
     0
-    >>> from cons2truct_check import check
+    >>> from construct_check import check
     >>> # ban while or for loops
     >>> check(HW_SOURCE_FILE, 'missing_digits', ['While', 'For'])
     True
     """
     "*** YOUR CODE HERE ***"
-    
+    if n<10:
+        return 0
+    return missing_digits(n//10)+((n%10-(n//10)%10-1) if n%10!=(n//10)%10 else 0)
             
-
 
 def next_largest_coin(coin):
     """Return the next coin. 
@@ -145,7 +150,15 @@ def count_coins(total):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    def part(total,smallest):
+        if total<0 or smallest:
+            return 0
+        if total==0:
+            return 1
+        return part(total-smallest,smallest)+part(total,next_largest_coin(smallest))
+    return part(total,1)
+        
+ 
 
 from operator import sub, mul
 
