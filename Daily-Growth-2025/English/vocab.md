@@ -15,3 +15,7 @@
 |hallmark|n.特点||
 |excruciating|adj.极度痛苦的|v.折磨|
 |unhinge|v.失常，使混乱|hinge v.依赖|
+|consecutive|adj.连续的||
+|specify|v.列举，指出||
+|simultaneously|adv.同时地||
+|instantiate|v.实例化，举例说明||
