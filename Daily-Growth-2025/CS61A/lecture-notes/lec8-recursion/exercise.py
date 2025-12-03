@@ -53,10 +53,10 @@ def sum_digits(n):
 # print(sum_digits(1234))
 #3. 判断数字是否为某个整数的幂（如 2 的幂）
 def is_power_of_two(n):
-  if n%2!=0:
-    return False
   if n==1:
     return True
+  if n%2!=0:
+    return False
   if n<=0:
     return False
   return is_power_of_two(n//2)
@@ -79,7 +79,7 @@ def f(n):
   return f(n//10)+n
 
 #6. 递归实现 max（不允许循环）
-def recursive_max(s):
+'''def recursive_max(s):
   def solustion(s,cur):
     if cur<=s[0]:
       return solustion(s[1:],s[0])
@@ -87,15 +87,25 @@ def recursive_max(s):
       return cur
     if cur>s[0]:
       return solustion(s[1:],cur)
-  return solustion(s,s[0])
-# print(recursive_max([2,3,4,1,8,7,20,11]))
+  return solustion(s,s[0])'''
+def maxx(s):
+  if len(s)==1:
+    return s[0]
+  sub=maxx(s[1:])
+  return s[0] if s[0]>sub else sub
+print(maxx([2,3,4,1,8,7,20,11]))
 
 #7. 数组和，但是必须用 divide & conquer（递归分治）
-def sum(s):
+'''def sum(s):
   if len(s)<=1:
     return s[0]
-  return s[0]+sum(s[1:])
-# print(sum([1,2,3,4,5]))
+  return s[0]+sum(s[1:])'''
+def sum(s):
+  if len(s)==1:
+    return s[0]
+  mid=len(s)//2
+  return sum(s[:mid])+sum(s[mid:])
+print(sum([1,2,3,4,5]))
 
 #8. zigzag(n,k)
 '''
@@ -223,3 +233,111 @@ def count_turns(n):
             return solution(values-direction,index+1,-direction,count+1)
         return solution(values+direction,index+1,direction,count)
   return solution(1,1,1,0)
+#纯递归版：
+def count_turns2(n):
+  def turns(k):
+    if k<=1:
+      return 0
+    if k%8==0 or num_eights(k)>0:
+      return turns(k-1)+1
+    return turns(k-1)
+  return turns(n)
+
+#11.互相递归（Mutual Recursion）
+# f(n) = n - g(f(n - 1))
+# g(n) = n - f(g(n - 1))
+# f(1) = 1, g(1) = 1
+def f(n):
+  if n==1:
+    return 1
+  return n-g(f(n - 1))
+def g(n):
+  if n==1:
+    return 1
+  return n - f(g(n - 1))
+# print(f(4))
+#12.递归统计某序列的局部极值点数量
+'''给定：
+一个序列 s，求序列中有多少个“局部峰值”和“局部谷值”。
+局部峰值：s[i] > s[i-1] and s[i] > s[i+1]
+局部谷值：s[i] < s[i-1] and s[i] < s[i+1]'''
+def jizhi(s,c):
+  if len(s)<3:
+    return c
+  if (s[1] > s[0] and s[1] > s[2]) or (s[1] < s[0] and s[1] < s[2]):
+    return jizhi(s[1:],c+1)
+  return jizhi(s[1:],c)
+# print(jizhi([1,3,2,4,3],0))
+
+#13.递归实现 flatten（扁平化嵌套结构）
+'''不能用列表推导、不能用循环。
+输入：[1, [2, [3, 4], 5], [6], 7]
+输出：[1, 2, 3, 4, 5, 6, 7]'''
+def flatten(s1,s2):
+  if len(s1)==0:
+      return s2
+  if type(s1[0])==int :
+    
+    return flatten(s1[1:],s2+[s1[0]])
+  # return flatten(s1[0],s2)+flatten(s1[1:],s2)  ×
+  return flatten(s1[1:],flatten(s1[0],s2)) #     √
+#把第一次递归的结果作为第二次递归的输入
+'''代码试图用 + 连接两个递归结果，但这违背了累加器模式的原则。
+累加器模式的核心思想
+累加器应该像一个"传递的篮子"：
+1.每次递归把新元素放入篮子
+2.篮子一路传递到底
+3.最后返回装满的篮子
+错误代码:
+pythonreturn flatten(s1[0], s2) + flatten(s1[1:], s2)
+这相当于：
+
+1.创建两个独立的篮子，都从 s2 开始
+2.分别装不同的东西
+3.最后把两个篮子的内容倒在一起
+
+这不是累加器模式，这是分治模式'''
+#--------------------------
+'''
+# 分治算法：
+def flatten(s):
+  if len(s)==0:
+    return []
+  if type(s[0])==int :
+    return [s[0]]+flatten(s[1:])
+  return flatten(s[0])+flatten(s[1:])
+'''
+print(flatten([1, [2, [3, 4], 5], [6], 7],[]))
+
+#14.递归版的“二分查找”
+'''输入：一个已排序列表 s 和目标值 x
+要求用递归实现：binary_search(s, x) → True/False
+'''
+
+def binary_search(s,x):
+  def helper(l,r):
+    if l>r:
+      return False
+    mid=(l+r)//2
+    if s[mid]>x:
+      return helper(l,mid-1)
+    elif s[mid]<x :
+      return helper(mid+1,r)
+    elif s[mid]==x:
+      return True
+    return False
+  return helper(0,len(s))
+print(binary_search([3],2))
+#15.递归分割整数（Partition Count）
+
+'''count_partitions(n, k)：
+求 n 能用不超过 k 的正整数分解的方案数。'''
+def count_partitions(n, k):
+  if n==0:
+    return 1
+  if n<0:
+    return 0
+  if k==0:
+    return 0
+  return count_partitions(n-k,k)+count_partitions(n,k-1)
+print(count_partitions(6,4))
