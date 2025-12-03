@@ -19,3 +19,5 @@
 |specify|v.列举，指出||
 |simultaneously|adv.同时地||
 |instantiate|v.实例化，举例说明||
+|bracket|v.将…归类,n.括号||
+|facade|n.门面，表象||
