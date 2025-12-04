@@ -21,3 +21,12 @@
 |instantiate|v.实例化，举例说明||
 |bracket|v.将…归类,n.括号||
 |facade|n.门面，表象||
+|violate|v.违反，侵犯||
+|chassis|n.底盘||
+|ripple|v./n. 波动，涟漪|ripple effect 连锁反应|
+|hierarchy|n.等级制度，层级||
+|goddamn|adj.受诅咒的，该死的||
+|epitomize|v.体现，概括||
+|plummet|v.急跌 n.铅锤||
+|notion|n.概念，杂货，想法||
+|underlying|adj.基础的||
