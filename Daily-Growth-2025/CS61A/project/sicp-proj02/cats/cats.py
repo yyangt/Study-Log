@@ -38,13 +38,13 @@ def about(topic):
     assert all([lower(x) == x for x in topic]), 'topics should be lowercase.'
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
-    def solution(search):
+    def sol(search):
         w=split(lower(remove_punctuation(search)))
         for i in w:
             if i in topic:
                 return True
         return False
-    return solution 
+    return sol 
     
 
 def accuracy(typed, reference):
@@ -67,6 +67,15 @@ def accuracy(typed, reference):
     typed_words = split(typed)
     reference_words = split(reference)
     # BEGIN PROBLEM 3
+    if typed_words==[] or reference_words==[]:
+        return 0.0
+    sum=0
+    for i in range(min(len(typed_words),len(reference_words))):
+        if typed_words[i]==reference_words[i]:
+            sum+=1
+            
+    return (sum/len(typed_words))*100
+
     "*** YOUR CODE HERE ***"
     # END PROBLEM 3
 
@@ -75,6 +84,7 @@ def wpm(typed, elapsed):
     """Return the words-per-minute (WPM) of the TYPED string."""
     assert elapsed > 0, 'Elapsed time must be positive'
     # BEGIN PROBLEM 4
+    return len(typed)/5/elapsed*60
     "*** YOUR CODE HERE ***"
     # END PROBLEM 4
 
@@ -85,6 +95,13 @@ def autocorrect(user_word, valid_words, diff_function, limit):
     than LIMIT.
     """
     # BEGIN PROBLEM 5
+    for i in valid_words:
+        if user_word==i:
+            return user_word
+    if min([diff_function(user_word,i,limit) for i in valid_words])>limit:
+        return user_word
+    best_word = min(valid_words, key=lambda word: diff_function(user_word, word, limit))
+    return best_word    
     "*** YOUR CODE HERE ***"
     # END PROBLEM 5
 
@@ -95,15 +112,22 @@ def shifty_shifts(start, goal, limit):
     their lengths.
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
+    if len(start)==0 or len(goal)==0:
+        return abs(len(goal)-len(start))
+    if limit<0:
+        return 1
+    if start[0]!=goal[0]:
+        return 1+shifty_shifts(start[1:],goal[1:],limit-1)
+    else :
+        return shifty_shifts(start[1:],goal[1:],limit)
+    
     # END PROBLEM 6
 
 
 def pawssible_patches(start, goal, limit):
     """A diff function that computes the edit distance from START to GOAL."""
-    assert False, 'Remove this line'
 
-    if ______________: # Fill in the condition
+    '''if ______________: # Fill in the condition
         # BEGIN
         "*** YOUR CODE HERE ***"
         # END
@@ -113,13 +137,14 @@ def pawssible_patches(start, goal, limit):
         "*** YOUR CODE HERE ***"
         # END
 
-    else:
-        add_diff = ... # Fill in these lines
-        remove_diff = ...
-        substitute_diff = ...
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+    else:'''
+    
+    add_diff = ... # Fill in these lines
+    remove_diff = ...
+    substitute_diff = ...
+    # BEGIN
+    "*** YOUR CODE HERE ***"
+    # END
 
 
 def final_diff(start, goal, limit):
