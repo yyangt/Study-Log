@@ -138,10 +138,17 @@ def pawssible_patches(start, goal, limit):
         # END
 
     else:'''
-    
-    add_diff = ... # Fill in these lines
-    remove_diff = ...
-    substitute_diff = ...
+    if limit<0:
+        return 1
+    if len(start)==0 or len(goal)==0:
+        return abs(len(goal)-len(start))
+    if start[0]!=goal[0]:
+        add_diff = 1+pawssible_patches(start, goal[1:], limit-1)# Fill in these lines
+        remove_diff = 1+pawssible_patches(start[1:],goal,limit-1)
+        substitute_diff = 1+pawssible_patches(start[1:],goal[1:],limit-1)
+        return min(add_diff,remove_diff,substitute_diff)
+    else:
+        return pawssible_patches(start[1:],goal[1:],limit)
     # BEGIN
     "*** YOUR CODE HERE ***"
     # END
@@ -162,6 +169,19 @@ def report_progress(typed, prompt, user_id, send):
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
     # END PROBLEM 8
+    
+    count=0.0
+    ans=0.0
+    for i in range(len(typed)):
+        if typed[i]==prompt[i]:
+            count+=1
+            ans=count/len(prompt)
+        else :
+            ans=count/len(prompt)
+            break
+    send({'id': user_id, 'progress': ans})
+    return ans
+        
 
 
 def fastest_words_report(times_per_player, words):
@@ -181,10 +201,14 @@ def time_per_word(times_per_player, words):
 
     Arguments:
         times_per_player: A list of lists of timestamps including the time
-                          the player started typing, followed by the time
-                          the player finished typing each word.
+                        the player started typing, followed by the time
+                        the player finished typing each word.
         words: a list of words, in the order they are typed.
     """
+    p=[]
+    for i in times_per_player:
+        p.append([i[j+1]-i[j] for j in range(len(i)-1)])
+    return game(words,p)
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
     # END PROBLEM 9
