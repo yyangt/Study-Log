@@ -30,3 +30,9 @@
 |plummet|v.急跌 n.铅锤||
 |notion|n.概念，杂货，想法||
 |underlying|adj.基础的||
+|adjacent|adj.邻近的|contiguous adj.邻近的|
+|metaphor|n.象征物，暗喻||
+|sibling|n.兄弟姐妹||
+|vertice|n.顶点||
+|nomenclature|n.命名法，称谓||
+|gratification|n.喜悦||
