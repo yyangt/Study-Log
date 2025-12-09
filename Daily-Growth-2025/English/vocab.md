@@ -36,3 +36,5 @@
 |vertice|n.顶点||
 |nomenclature|n.命名法，称谓||
 |gratification|n.喜悦||
+|cryptic|adj.神秘的，隐藏的||
+|permutation|n.排列，变换||
