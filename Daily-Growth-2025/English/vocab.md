@@ -38,3 +38,4 @@
 |gratification|n.喜悦||
 |cryptic|adj.神秘的，隐藏的||
 |permutation|n.排列，变换||
+|bifurcate|v./n.分叉||
